@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body .ace_scrollbar {
+  display: none;
+}
+
+.app {
+  -webkit-app-region: drag;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.grid {
+  width: 100%;
+  height: fill;
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-areas:
+    'explorer   file  file   '
+    'terminal   file  file   '
+    'terminal   file  file   ';
+}
+
+.nonDragable {
+  -webkit-app-region: no-drag;
+}
+
+.editorStyle {
+  width: 100%;
+  height: 100%;
+}
