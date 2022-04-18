@@ -76,7 +76,7 @@ const Editor=()=> {
   const [value, setValue] = useState(defaultValue);
   const [placeholder, setPlaceholder] = useState("Placeholder Text");
   const [theme, setTheme] = useState("rat");
-  const [mode, setMode] = useState("java");
+  const [mode, setMode] = useState("javascript");
 
   const [enableBasicAutocompletion, setEnableBasicAutocompletion] = useState(true);
   const [enableLiveAutocompletion, setEnableLiveAutocompletion] = useState(true);
