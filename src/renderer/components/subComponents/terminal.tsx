@@ -1,34 +1,31 @@
-import React, {useEffect, useRef} from 'react'
-import { Box } from '@mui/material'
-import { Terminal } from 'xterm'
-import { FitAddon } from 'xterm-addon-fit';
+import React, {useEffect, useState} from 'react'
+import { Box,TextField } from '@mui/material'
 
 const AppTerminal = () => {
-    const terminal = new Terminal({
-        convertEol: true,
-      fontSize: 15,
-      rendererType: 'dom',
-      cursorBlink:true,
-    });
-    const fitAddon = new FitAddon();
 
+  const [text, setText] = useState("dada");
+
+   
     useEffect(()=>{
-        const terminalRef = document.getElementById('termArea');
-        if(terminalRef !=null){
-            terminal.loadAddon(fitAddon);
-            terminal.open(terminalRef);
-            
-        }
-        terminal.write('hello world');
-        fitAddon.fit();
+      
     })
 
+    const handleTextFieldChange = (e:any) =>{
+      setText(e.target.value)
+    }
     /**
      * <div id='termArea' className='term'></div>
+     * variant="standard"
+          InputProps={{
+            disableUnderline: true,
+          }}
      */
 
   return (
-    <Box id='termArea' sx={{gridArea:'terminal', borderRadius:'5px', display:'flex', width:1, height:1}} bgcolor={'primary.dark'}>
+    <Box sx={{gridArea:'terminal', borderRadius:'5px', display:'flex',  }} bgcolor={'primary.dark'}>
+      
+       
+
     </Box>
   )
 }

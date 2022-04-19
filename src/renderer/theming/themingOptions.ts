@@ -19,4 +19,5 @@ export const themeOptions: ThemeOptions = {
         },
         divider: '#60564d',
       },
+      
 }
