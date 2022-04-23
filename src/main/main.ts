@@ -13,6 +13,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import WindowFunc from './windowFuncs';
+import findPathEvents from './pathFinder';
 import { resolveHtmlPath } from './util';
 
 export default class AppUpdater {
@@ -30,6 +31,10 @@ ipcMain.on('ipc-example', async (event, arg) => {
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
 });
+
+
+
+findPathEvents(mainWindow);
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -68,7 +73,7 @@ const createWindow = async () => {
   const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths);
   };
-
+ 
   mainWindow = new BrowserWindow({
     show: true,
     minHeight:720,
@@ -77,11 +82,14 @@ const createWindow = async () => {
     autoHideMenuBar: true,
     icon: getAssetPath('icon.png'),
     webPreferences: {
+      nodeIntegration: true,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
   });
+
+  
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
@@ -101,6 +109,7 @@ const createWindow = async () => {
   });
 
   WindowFunc(mainWindow);
+
 
   // Open urls in the user's browser
   mainWindow.webContents.setWindowOpenHandler((edata) => {

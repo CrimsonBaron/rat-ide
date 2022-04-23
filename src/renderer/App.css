@@ -21,11 +21,9 @@ body .ace_scrollbar {
   gap: 0.25rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-areas:
-    'explorer   file  file   '
-    'explorer   file  file   '
-    'explorer   file  file   '
-    'terminal   file  file   '
-    'terminal   file  file   ';
+    'explorer   file  file  file  file '
+    'explorer   file  file  file file  '
+    'explorer   file  file file  file  '
 }
 
 .nonDragable {

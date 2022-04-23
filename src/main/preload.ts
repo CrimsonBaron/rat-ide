@@ -14,8 +14,14 @@ contextBridge.exposeInMainWorld('electron', {
     maximize(){
       ipcRenderer.send('btn-maximize');
     },
+    getFolderPath(){
+      ipcRenderer.send('get-folder-path');
+    },
+    loadFiles(path:String){
+      ipcRenderer.send('load-all-files', path);
+    },
     on(channel: string, func: (...args: unknown[]) => void) {
-      const validChannels = ['ipc-example'];
+      const validChannels = ['ipc-example','get-folder-path','load-all-files'];
       if (validChannels.includes(channel)) {
         const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
           func(...args);
@@ -28,7 +34,7 @@ contextBridge.exposeInMainWorld('electron', {
       return undefined;
     },
     once(channel: string, func: (...args: unknown[]) => void) {
-      const validChannels = ['ipc-example'];
+      const validChannels = ['ipc-example','get-folder-path','load-all-files'];
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (_event, ...args) => func(...args));
