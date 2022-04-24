@@ -2,7 +2,21 @@ import { BrowserWindow, ipcMain, dialog  } from "electron";
 import path from 'path';
 import fs from 'fs';
 
+const dirTree = require("directory-tree");
+
+interface fileProps{
+  type:String
+  name:String
+  files:any
+}
+
 const findPathEvents = (mainWindow:any)=>{
+
+  
+
+  const recursiveFiles = async (dir:any) =>{
+    return dirTree(dir, {attributes:["type", "extension"]});
+  }
 
     ipcMain.on('get-folder-path', async (event,arg)=>{
         const {filePaths} = await  dialog.showOpenDialog(mainWindow,{
@@ -17,22 +31,7 @@ const findPathEvents = (mainWindow:any)=>{
     ipcMain.on('load-all-files', async (event,arg)=>{
           const folderPath = arg;
           
-          const files = fs
-          .readdirSync(folderPath)
-          .map(file => {
-            const stats = fs.statSync(path.join(folderPath, file))
-            return {
-              name: file,
-              directory: stats.isDirectory()
-            }
-          })
-          .sort((a, b) => {
-            if (a.directory === b.directory) {
-              return a.name.localeCompare(b.name)
-            }
-            return a.directory ? -1 : 1
-          })
-
+          const files = await  recursiveFiles(folderPath)
           event.reply('load-all-files', files);
     })
 }

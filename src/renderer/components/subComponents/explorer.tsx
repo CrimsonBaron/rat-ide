@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useMemo} from 'react'
 import { Box,Button } from '@mui/material'
-
+import Tree from "./tree/tree"
 
 interface explorerViewProps{
     callBackSetPath(path:String):void;
@@ -44,16 +44,54 @@ interface folderViewProps{
 const FolderView = (props:folderViewProps) =>{
 
     const {files} = props;
+    const [tree, setTree] = useState({});
+
+    const convertChildren = async (children: any)=>{
+        let files:any[] = [];
+
+        (children || []).map( ((file:any) =>{
+            if(file.type ==="file"){
+              files.push({
+                type: "file", 
+                name: file.name
+              })
+            }else{
+              files.push({
+                type:"folder",
+                name: file.name,
+                files:  convertChildren(file.children)
+              })
+            }
+        }))
+        return files;
+    }
+
+    const convertToTreeStructure = async (files:any)=>{
+      const tree = {
+        type: "folder",
+        name: files.name ,
+        files: await convertChildren(files.children)
+      }
+      return tree;
+   }
+
+   const convert= async()=>{
+     const localTree = await convertToTreeStructure(files);
+     await setTree(localTree );
+
+
+   }
+
+   useEffect(()=>{
+
+     convert();
+   })
+
+
 
     return (
         <Box sx={{width:1, height:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}} >
-              {
-                  files.map((file)=>{
-                      return(
-                        <div>{file.name}</div>
-                      )
-                  })
-              }
+            <Tree files={tree} />
         </Box>
       )
 }
@@ -68,9 +106,9 @@ const Explorer = () => {
            window.electron.ipcRenderer.loadFiles(folderPath);
             window.electron.ipcRenderer.once('load-all-files',(arg:any)=>{
                  setFiles(arg);
+                 
             })
        }
-
     })
     
   return (
