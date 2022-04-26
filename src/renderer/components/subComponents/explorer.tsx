@@ -46,74 +46,10 @@ interface folderViewProps{
 const FolderView = (props:folderViewProps) =>{
 
     const {files, onclickCallback} = props;
-    const [tree, setTree] = useState({});
 
-    interface RenderTree {
-      id:string;
-      type:string
-      name: string;
-      files?: readonly RenderTree[];
-    }
-
-
-    const convertChildren =  (children: any)=>{
-        let files:RenderTree[] = [];
-
-        (children || []).map(( async (file:any, index:any) =>{
-           if(file.name != ".git"){
-            if(file.type ==="file"){
-              files.push({
-                id:Math.floor(Math.random() * 100000)+"",
-                type: "file", 
-                name: file.name,
-                files:[]
-              })
-            }else{
-
-              
-             let localFiles = await convertChildren(file.children)
-
-             Promise.all(localFiles).then((values)=>{
-              localFiles = values
-            })
-
-
-              files.push({
-                id:Math.floor(Math.random() * 1000000)+"",
-                type:"folder",
-                name: file.name,
-                files: localFiles 
-              })
-            }
-           }
-        }))
-        
-        Promise.all(files).then((values)=>{
-            files = values
-        })
-
-        return files;
-    }
-
-    const convertToTreeStructure =  (files:any)=>{
-      const tree = {
-        id:files.name,
-        type: "folder",
-        name: files.name ,
-        files:  convertChildren(files.children)
-      }
-      return tree;
-   }
-
-   const convert= async()=>{
-     const localTree = await convertToTreeStructure(files);
-     await setTree(localTree );
-
-
-   }
-
+  
    useEffect(()=>{
-     convert();
+ 
    })
 
    /**
@@ -130,7 +66,7 @@ const FolderView = (props:folderViewProps) =>{
                 </IconButton>
               </Tooltip>
             </Box>
-            <Tree files={tree} />
+            <Tree files={files} />
         </Box>
       )
 }

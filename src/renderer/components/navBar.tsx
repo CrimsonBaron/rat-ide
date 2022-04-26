@@ -51,10 +51,9 @@ const NavBar = () => {
         },
       }));
 
-  return (
-    <Box sx={{height:45}}>
-        <AppBar position='fixed' sx={{height:45,display:'flex', flexDirection:'row',zIndex: (theme) => theme.zIndex.drawer + 1, } } elevation={0} color={'transparent'}>
-            <Box sx={{display:'flex', flexDirection:'row',margin:1}}>
+      /**
+       * 
+       *  <Box sx={{display:'flex', flexDirection:'row',margin:1}}>
                 <Box sx={{paddingLeftRight:.5, borderRadius:'5px', display:'flex', justifyContent:'center', alignItems:'center'}} bgcolor={'primary.dark'} >
                     <Avatar sx={{width:25,height:25,marginLeft:1}} />
                     <Search className='nonDragable'>
@@ -65,7 +64,13 @@ const NavBar = () => {
                     </Search>
                 </Box>
             </Box>
-            <Box sx={{height:29, paddingLeft:5,  paddingRight:5, borderRadius:'5px', flex:1,margin:1, display:'flex',alignItems:'center'}} bgcolor={'primary.dark'}>
+       */
+
+  return (
+    <Box sx={{height:45}}>
+        <AppBar position='fixed' sx={{height:45,display:'flex', flexDirection:'row',zIndex: (theme) => theme.zIndex.drawer + 1, } } elevation={0} color={'transparent'}>
+           
+            <Box sx={{height:29, paddingLeft:1,  paddingRight:5, borderRadius:'5px', flex:1,margin:1, display:'flex',alignItems:'center'}} bgcolor={'primary.dark'}>
               <ButtonGroup variant="text" aria-label="text button group" sx={{height:25}}>
               <TopBarButton title={'file'} color={'#768669'}/>
                 <TopBarButton title={'edit'} color={'#7C5E67'}/>

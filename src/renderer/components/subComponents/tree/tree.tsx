@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React, {useMemo} from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { alpha, styled } from '@mui/material/styles';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem, { TreeItemProps, treeItemClasses } from '@mui/lab/TreeItem';
 import Collapse from '@mui/material/Collapse';
 import { TransitionProps } from '@mui/material/transitions';
-import { node } from 'webpack';
 
 
 function MinusSquare(props: SvgIconProps) {
@@ -68,7 +67,7 @@ const getFileColor =(label:string)=>{
 }
 
 const StyledTreeItem = styled((props: TreeItemProps) => (
-  <TreeItem {...props} TransitionComponent={undefined} sx={{color:`${getFileColor(props.label? props.label?.toString(): "")}`}} />
+  <TreeItem {...props} TransitionComponent={undefined} sx={{color:`${getFileColor(props.label? props.label?.toString(): "")}`, overflow:"hidden"}} />
 ))(({ theme }) => ({
   [`& .${treeItemClasses.iconContainer}`]: {
     '& .close': {
@@ -92,21 +91,22 @@ const Tree = (props:treeProps) => {
     const  {files} = props;
 
     interface RenderTree {
-      id:string;
-      type:string
       name: string;
-      files?: readonly RenderTree[];
+      children?: readonly RenderTree[];
     }
 
-   
+    React.useEffect(()=>{
+    })
+
     const renderTree = (nodes: RenderTree) => (
       <StyledTreeItem key={nodes.name} nodeId={nodes.name? nodes.name: ""} label={nodes.name}>
-        {Array.isArray(nodes.files)
-          ? nodes.files.map((node) => renderTree(node))
+        {Array.isArray(nodes.children) 
+          ? nodes.children.map((node) => renderTree(node))
           : null}
       </StyledTreeItem>
     );
-   
+    const renderedTree = useMemo(()=>(renderTree(files)),[files])
+
 
     return (
         <TreeView
@@ -115,10 +115,11 @@ const Tree = (props:treeProps) => {
           defaultCollapseIcon={<MinusSquare />}
           defaultExpandIcon={<PlusSquare />}
           defaultEndIcon={<CloseSquare />}
-          sx={{ height: 1, flexGrow: 1, maxWidth: 1, width:1, overflowY: 'auto' }}
+          sx={{ height: 1, flexGrow: 1, maxWidth: 1, width:1, overflowY: 'auto', textOverflow:"ellipsis" }}
+          className={"tree"}
+
         >
-           
-           {renderTree(files)}
+           {renderedTree} 
             
         </TreeView>
       );

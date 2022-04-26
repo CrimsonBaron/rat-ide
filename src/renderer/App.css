@@ -21,30 +21,33 @@ body .ace_scrollbar {
   gap: 0.25rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-areas:
-    'explorer   file  file  file  file '
-    'explorer   file  file  file file  '
-    'explorer   file  file file  file  '
+    'explorer   file  file     '
+    'explorer  file  file    '
+    'explorer  file  file    ';
 }
 
 .nonDragable {
   -webkit-app-region: no-drag;
 }
 
-.editorStyle  {
+.editorStyle {
   width: 100%;
   height: 100%;
 }
 
-.term{
+.term {
   height: 25%;
   padding: 5px;
 }
 
-.xterm-helpers{
+.xterm-helpers {
   position: absolute;
   width: 0;
   height: 0;
 }
 
-
-
+.tree::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
