@@ -47,9 +47,7 @@ themes.forEach(theme => require(`ace-builds/src-noconflict/theme-${theme}`));
 import "ace-builds/src-min-noconflict/ext-searchbox";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 
-const defaultValue = `function onLoad(editor) {
-  console.log("i've loaded");
-}`;
+const defaultValue = '';
 const Editor=()=> {
  const onLoad =() => {
     console.log("i've loaded");
@@ -86,6 +84,17 @@ const Editor=()=> {
 
   const [fontSize, setFontSize] = useState(14);
   
+  useEffect(()=>{
+    window.electron.ipcRenderer.on('show-file',(arg:any)=>{
+      console.log(arg);
+        setMode(arg);
+    })
+
+    window.electron.ipcRenderer.on('load-file',(arg:any)=>{
+      console.log(arg);
+      setValue(arg);
+    })
+  })
 
     return (
         <Box sx={{gridArea:'file',borderRadius:'5px'}}>

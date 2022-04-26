@@ -34,6 +34,29 @@ const findPathEvents = (mainWindow:any)=>{
           const files = await  recursiveFiles(folderPath)
           event.reply('load-all-files', files);
     })
+
+    ipcMain.on('show-file', async (event,arg)=>{
+      const end = arg;
+      event.reply('show-file', end);
+    })
+
+    ipcMain.on('load-file', async (event,arg)=>{
+      const path = arg;
+      let content:string = '';
+      if (path != undefined || path != ''){
+        fs.readFile(path, 'utf-8', (err, data) => {
+          if(err){
+              console.log(err);
+              return;
+          }
+          console.log(data);
+          content = data;
+      });
+      }
+
+
+      event.reply('load-file', content);
+    })
 }
 
 export default findPathEvents

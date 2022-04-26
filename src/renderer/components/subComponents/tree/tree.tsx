@@ -89,13 +89,29 @@ interface treeProps{
 const Tree = (props:treeProps) => {
 
     const  {files} = props;
+    let fileMap = new Map<string, string>();
 
     interface RenderTree {
       name: string;
       children?: readonly RenderTree[];
     }
 
+    const getFileMap = (files:any) =>{
+      fileMap.set(files.name, files.path);
+      if(Array.isArray(files.children)){
+        files.children.map((file:any) => getFileMap(file))
+      }
+      return;
+    }
+
+    
+
+   
+
     React.useEffect(()=>{
+      if(fileMap.size <= 0){
+        getFileMap(files);
+      }
     })
 
     const renderTree = (nodes: RenderTree) => (
@@ -106,7 +122,40 @@ const Tree = (props:treeProps) => {
       </StyledTreeItem>
     );
     const renderedTree = useMemo(()=>(renderTree(files)),[files])
+    
+    const onSelect = (event:any,nodeId:any)=>{
+      const endpart = nodeId.substring(nodeId.lastIndexOf('.')+1,nodeId.length)
+      let end:string = '';
 
+      switch (endpart) {
+        case 'java':
+        case 'html':
+        case 'css':
+        case 'json':
+          end = endpart;
+          break;
+        case 'js':
+        case 'jsx':
+          end = 'javascript';
+          break;
+        case 'ts':
+        case 'tsx':
+          end = 'typescript';
+          break;
+        
+        default:
+          end = 'javascript';
+          break;
+      }
+
+      console.log(fileMap.get(nodeId))
+
+      const path:string = fileMap.get(nodeId)!;
+
+      window.electron.ipcRenderer. displayFile(end);
+      window.electron.ipcRenderer.loadFile(path);
+
+    }
 
     return (
         <TreeView
@@ -115,6 +164,7 @@ const Tree = (props:treeProps) => {
           defaultCollapseIcon={<MinusSquare />}
           defaultExpandIcon={<PlusSquare />}
           defaultEndIcon={<CloseSquare />}
+          onNodeSelect={onSelect}
           sx={{ height: 1, flexGrow: 1, maxWidth: 1, width:1, overflowY: 'auto', textOverflow:"ellipsis" }}
           className={"tree"}
 

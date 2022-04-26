@@ -7,7 +7,9 @@ declare global {
         minimize():void;
         maximize():void;
         getFolderPath():void;
+        displayFile(fileEnd:string):void;
         loadFiles(path:String):void;
+        loadFile(path:string):void;
         on(
           channel: string,
           func: (...args: unknown[]) => void
