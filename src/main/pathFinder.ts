@@ -40,22 +40,33 @@ const findPathEvents = (mainWindow:any)=>{
       event.reply('show-file', end);
     })
 
+    let PATH:string = "";
+
     ipcMain.on('load-file', async (event,arg)=>{
       const path = arg;
-      let content:string = '';
-      if (path != undefined || path != ''){
-        fs.readFile(path, 'utf-8', (err, data) => {
+      PATH = arg;
+      
+      if (path != undefined || path != '' || !fs.statSync(path).isDirectory()){
+        fs.readFile(path, 'utf-8',async (err, data) => {
           if(err){
               console.log(err);
               return;
           }
           console.log(data);
-          content = data;
+          event.reply('load-file', data);
       });
       }
 
 
-      event.reply('load-file', content);
+      
+    })
+
+    ipcMain.on("save-file",  (event,arg)=>{
+      const content = arg;
+      if(content != " " || content != undefined || PATH != "" || PATH != undefined){
+        console.log(content);
+        fs.writeFileSync(PATH,content,'utf-8');
+      }
     })
 }
 

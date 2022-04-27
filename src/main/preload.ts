@@ -26,6 +26,9 @@ contextBridge.exposeInMainWorld('electron', {
     displayFile(fileEnd:string){
       ipcRenderer.send("show-file",fileEnd);
     },
+    writeFile(content:String){
+      ipcRenderer.send("save-file", content);
+    },
     on(channel: string, func: (...args: unknown[]) => void) {
       const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file'];
       if (validChannels.includes(channel)) {

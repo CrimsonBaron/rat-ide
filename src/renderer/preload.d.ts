@@ -10,6 +10,7 @@ declare global {
         displayFile(fileEnd:string):void;
         loadFiles(path:String):void;
         loadFile(path:string):void;
+        writeFile(content:String):void;
         on(
           channel: string,
           func: (...args: unknown[]) => void

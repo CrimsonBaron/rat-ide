@@ -134,6 +134,9 @@ const Tree = (props:treeProps) => {
         case 'json':
           end = endpart;
           break;
+        case 'scss':
+          end = 'sass';
+          break;
         case 'js':
         case 'jsx':
           end = 'javascript';

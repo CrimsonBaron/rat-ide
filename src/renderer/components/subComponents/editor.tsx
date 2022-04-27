@@ -54,7 +54,7 @@ const Editor=()=> {
   }
  const onChange =(newValue:String)=> {
     console.log("change", newValue);
-    
+  window.electron.ipcRenderer.writeFile(newValue);
   }
 
  const onSelectionChange =(newValue:String, event:any) => {
@@ -110,8 +110,19 @@ const Editor=()=> {
             onCursorChange={onCursorChange}
             onValidate={onValidate}
             value={value}
-            fontSize={15}
+            fontSize={fontSize}
             highlightActiveLine={highlightActiveLine}
+            commands={[{
+              name:"change-fontSize-plus",
+              bindKey:{win: "Ctrl-Q", mac:"Command-Q"},
+              exec:()=>{setFontSize(fontSize+1)}
+            },
+            {
+              name:"change-fontSize-minus",
+              bindKey:{win: "Ctrl-E", mac:"Command-E"},
+              exec:()=>{setFontSize(fontSize-1)}
+            },
+          ]}
             setOptions={{
               enableLiveAutocompletion: enableLiveAutocompletion,
               enableSnippets:enableSnippets,
