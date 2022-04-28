@@ -34,7 +34,7 @@ const themes = [
   "solarized_dark",
   "solarized_light",
   "terminal",
-  "rat"
+  
 ];
 
 languages.forEach(lang => {
@@ -73,7 +73,7 @@ const Editor=()=> {
 
   const [value, setValue] = useState(defaultValue);
   const [placeholder, setPlaceholder] = useState("Placeholder Text");
-  const [theme, setTheme] = useState("rat");
+  const [theme, setTheme] = useState("monokai");
   const [mode, setMode] = useState("javascript");
 
   const [enableBasicAutocompletion, setEnableBasicAutocompletion] = useState(true);
@@ -93,6 +93,10 @@ const Editor=()=> {
     window.electron.ipcRenderer.on('load-file',(arg:any)=>{
       console.log(arg);
       setValue(arg);
+    })
+
+    window.electron.ipcRenderer.on("close-project",()=>{
+      setValue("");
     })
   })
 

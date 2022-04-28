@@ -90,6 +90,10 @@ const Explorer = () => {
                  
             })
        }
+
+       window.electron.ipcRenderer.on("close-project",()=>{
+         closeProject();
+       })
     })
     
   return (

@@ -20,7 +20,9 @@ const WindowFunc = (mainWindow: BrowserWindow) =>{
         event.preventDefault();
         mainWindow.close();
     })
-
+    ipcMain.on("close-project", (event, arg)=>{
+        event.reply("close-project");
+    })
 }
 
 

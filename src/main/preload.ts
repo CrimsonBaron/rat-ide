@@ -29,8 +29,11 @@ contextBridge.exposeInMainWorld('electron', {
     writeFile(content:String){
       ipcRenderer.send("save-file", content);
     },
+    closeProject(){
+      ipcRenderer.send("close-project");
+    },
     on(channel: string, func: (...args: unknown[]) => void) {
-      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file'];
+      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file', "close-project"];
       if (validChannels.includes(channel)) {
         const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
           func(...args);
@@ -43,7 +46,7 @@ contextBridge.exposeInMainWorld('electron', {
       return undefined;
     },
     once(channel: string, func: (...args: unknown[]) => void) {
-      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file'];
+      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file',"close-project"];
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (_event, ...args) => func(...args));

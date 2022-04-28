@@ -9,6 +9,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import TopBarButton from './subComponents/topBarButton';
 
+import FileMenu from './subComponents/menus/fileMenu';
+import EditMenu from './subComponents/menus/editMenu';
+
 const NavBar = () => {
     const close = ()=>{
         window.electron.ipcRenderer.close();
@@ -64,6 +67,11 @@ const NavBar = () => {
                     </Search>
                 </Box>
             </Box>
+
+              <TopBarButton title={'view'} color={'#9C865B'} menuElement={<FileMenu/>}/>
+                <TopBarButton title={'go'} color={'#97745C'} menuElement={<FileMenu/>}/>
+                <TopBarButton title={'run'} color={'#784F53'} menuElement={<FileMenu/>}/>
+                <TopBarButton title={'help'} color={'#9FB8B5'} menuElement={<FileMenu/>}/>
        */
 
   return (
@@ -72,13 +80,9 @@ const NavBar = () => {
            
             <Box sx={{height:29, paddingLeft:1,  paddingRight:5, borderRadius:'5px', flex:1,margin:1, display:'flex',alignItems:'center'}} bgcolor={'primary.dark'}>
               <ButtonGroup variant="text" aria-label="text button group" sx={{height:25}}>
-              <TopBarButton title={'file'} color={'#768669'}/>
-                <TopBarButton title={'edit'} color={'#7C5E67'}/>
-                <TopBarButton title={'selection'} color={'#D99B66'}/>
-                <TopBarButton title={'view'} color={'#9C865B'}/>
-                <TopBarButton title={'go'} color={'#97745C'}/>
-                <TopBarButton title={'run'} color={'#784F53'}/>
-                <TopBarButton title={'help'} color={'#9FB8B5'}/>
+              <TopBarButton title={'file'} color={'#768669'} menuElement={<FileMenu/>}/>
+                <TopBarButton title={'edit'} color={'#7C5E67'} menuElement={<EditMenu/>}/>
+                <TopBarButton title={'selection'} color={'#D99B66'} menuElement={<FileMenu/>}/>
               </ButtonGroup>
             </Box>
             <Box sx={{margin:1, paddingLeft:.5,paddingRight:.5, borderRadius:'5px'}} bgcolor={'primary.dark'}>

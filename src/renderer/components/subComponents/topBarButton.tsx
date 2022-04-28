@@ -4,11 +4,12 @@ import React from 'react'
 interface topBarButtonProps{
     title:String,
     color:String,
+    menuElement: React.ReactNode,
 }
 
 const TopBarButton = (props:topBarButtonProps) => {
 
-    const {title, color} = props;
+    const {title, color, menuElement} = props;
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,32 +41,9 @@ const TopBarButton = (props:topBarButtonProps) => {
             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
             transformOrigin={{vertical: 'top', horizontal: 'center'}}
             MenuListProps={{'aria-labelledby': 'basic-button',}}
+            
          >
-            <MenuList dense>
-                <MenuItem>
-                    <ListItemText inset>Single</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                    <ListItemText inset>1.15</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                    <ListItemText inset>Double</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                     Custom: 1.2
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                    <ListItemText>Add space before paragraph</ListItemText>
-                </MenuItem>
-                <MenuItem>
-                    <ListItemText>Add space after paragraph</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                    <ListItemText>Custom spacing...</ListItemText>
-                </MenuItem>
-            </MenuList>
+            {menuElement}
         </Menu>
 </>
   )
