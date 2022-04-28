@@ -80,6 +80,7 @@ const createWindow = async () => {
     minWidth: 1200,
     frame: false,
     autoHideMenuBar: true,
+    title:"Rat-editor",
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,

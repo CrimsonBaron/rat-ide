@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import AceEditor from "react-ace";
 import { Box } from "@mui/material";
 
@@ -34,7 +34,7 @@ const themes = [
   "solarized_dark",
   "solarized_light",
   "terminal",
-  
+  "rat",
 ];
 
 languages.forEach(lang => {
@@ -49,6 +49,10 @@ import "ace-builds/src-min-noconflict/ext-language_tools";
 
 const defaultValue = '';
 const Editor=()=> {
+
+  let ace = useRef(null)
+  const [coppiedText,setCoppiedText]= useState("")
+
  const onLoad =() => {
     console.log("i've loaded");
   }
@@ -70,10 +74,9 @@ const Editor=()=> {
  const onValidate =(annotations:any)=> {
     console.log("onValidate", annotations);
   }
-
   const [value, setValue] = useState(defaultValue);
   const [placeholder, setPlaceholder] = useState("Placeholder Text");
-  const [theme, setTheme] = useState("monokai");
+  const [theme, setTheme] = useState("rat");
   const [mode, setMode] = useState("javascript");
 
   const [enableBasicAutocompletion, setEnableBasicAutocompletion] = useState(true);
@@ -98,6 +101,20 @@ const Editor=()=> {
     window.electron.ipcRenderer.on("close-project",()=>{
       setValue("");
     })
+
+    window.electron.ipcRenderer.on("editor-undo",()=>{
+      if(ace != null){
+        ace.editor.undo();
+      }
+    })
+
+    window.electron.ipcRenderer.on("editor-redo",()=>{
+      if(ace != null){
+        ace.editor.redo();
+      }
+    })
+
+
   })
 
     return (
@@ -116,6 +133,7 @@ const Editor=()=> {
             value={value}
             fontSize={fontSize}
             highlightActiveLine={highlightActiveLine}
+            ref={(ref:any)=>{ace=ref}}
             commands={[{
               name:"change-fontSize-plus",
               bindKey:{win: "Ctrl-Q", mac:"Command-Q"},

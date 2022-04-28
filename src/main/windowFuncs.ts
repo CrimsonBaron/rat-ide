@@ -23,6 +23,15 @@ const WindowFunc = (mainWindow: BrowserWindow) =>{
     ipcMain.on("close-project", (event, arg)=>{
         event.reply("close-project");
     })
+
+    ipcMain.on("editor-undo", (event, arg)=>{
+        event.reply("editor-undo");
+    })
+
+    ipcMain.on("editor-redo", (event, arg)=>{
+        event.reply("editor-redo");
+    })
+
 }
 
 

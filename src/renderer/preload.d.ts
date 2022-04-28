@@ -12,6 +12,8 @@ declare global {
         loadFile(path:string):void;
         writeFile(content:String):void;
         closeProject():void;
+        undo():void;
+        redo():void;
         on(
           channel: string,
           func: (...args: unknown[]) => void

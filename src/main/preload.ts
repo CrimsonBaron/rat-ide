@@ -32,8 +32,14 @@ contextBridge.exposeInMainWorld('electron', {
     closeProject(){
       ipcRenderer.send("close-project");
     },
+    undo(){
+      ipcRenderer.send("editor-undo");
+    },
+    redo(){
+      ipcRenderer.send("editor-redo");
+    },
     on(channel: string, func: (...args: unknown[]) => void) {
-      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file', "close-project"];
+      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file', "close-project","editor-undo","editor-paste","editor-copy","editor-cut","editor-redo","editor-undo"];
       if (validChannels.includes(channel)) {
         const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
           func(...args);
@@ -46,7 +52,7 @@ contextBridge.exposeInMainWorld('electron', {
       return undefined;
     },
     once(channel: string, func: (...args: unknown[]) => void) {
-      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file',"close-project"];
+      const validChannels = ['ipc-example','get-folder-path','load-all-files','show-file','load-file',"close-project","editor-undo","editor-paste","editor-copy","editor-cut","editor-redo","editor-undo"];
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`
         ipcRenderer.once(channel, (_event, ...args) => func(...args));
