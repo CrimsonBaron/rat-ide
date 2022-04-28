@@ -5,7 +5,8 @@
 <br>
 
 <p>
-  Electron React Boilerplate uses <a href="https://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="https://webpack.js.org/">Webpack</a> and <a href="https://www.npmjs.com/package/react-refresh">React Fast Refresh</a>. The same can be said for Rat-ide
+  Electron React Boilerplate uses <a href="https://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="https://webpack.js.org/">Webpack</a> and <a href="https://www.npmjs.com/package/react-refresh">React Fast Refresh</a>. The same can be said for Rat-ide<br>
+  additional technology:  <a href="https://mui.com/">react MUI</a>, <a href="https://ace.c9.io/">AceEditor</a>, <a href="https://github.com/securingsincity/react-ace">ReactAce</a>
 </p>
 
 <br>
@@ -15,6 +16,8 @@
 ## Install
 
 Clone the repo and install dependencies:
+
+step ONE:
 
 ```bash
 git clone --branch master https://github.com/GithubAdamKiss/rat-ide.git
@@ -27,21 +30,19 @@ if said install crashes with requiment for visual studio c dependencies please u
 npm uninstall node-pty
 npm install
 ```
+step TWO: <br>
+  u need to copy two aditional files into [node_modules/ace-builds/src-noconflict](./node_modules/ace-builds/src-noconflict/)
 
+  first: [theme-rat](./node_modules/ace-builds/src-noconflict/theme-rat.js) the custom  <a href="https://ace.c9.io/">AceEditor</a> theme 
+
+  second: [ace-builds-modules](./node_modules/ace-builds/ace-modules.d.ts) the theme decleration
+   
 ## Starting Development
 
 Start the app in the `dev` environment:
 
 ```bash
 npm start
-```
-
-## Packaging for Production
-
-To package apps for the local platform:
-
-```bash
-npm run package
 ```
 
 ## Keyboard Shortcuts:
