@@ -37,7 +37,7 @@ step TWO: <br>
 
   second: [ace-builds-modules](./node_modules/ace-builds/ace-modules.d.ts) the theme decleration
    
-## Starting Development
+## Starting rat-ide
 
 Start the app in the `dev` environment:
 
