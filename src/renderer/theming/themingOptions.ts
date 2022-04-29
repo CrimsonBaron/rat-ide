@@ -1,5 +1,13 @@
 import {ThemeOptions} from '@mui/material';
 
+/**
+ * this class takes care of the coloring of the entire app
+ * changing said values affects 90% of app coloring
+ * 
+ * more info at :  https://mui.com/material-ui/customization/color/#main-content
+ *           or    https://bareynol.github.io/mui-theme-creator/#text-buttons
+ */
+
 export const themeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',

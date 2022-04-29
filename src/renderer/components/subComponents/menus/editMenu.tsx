@@ -1,5 +1,10 @@
-import React from 'react'
-import { Button,MenuList,MenuItem,ListItemText,Divider, Menu } from '@mui/material';
+import {MenuList,MenuItem,ListItemText } from '@mui/material';
+
+
+/**
+ * this class generates edit topbar menu
+ */
+
 
 const undo = ()=>{
     window.electron.ipcRenderer.undo();

@@ -7,6 +7,11 @@ import Collapse from '@mui/material/Collapse';
 import { TransitionProps } from '@mui/material/transitions';
 
 
+/**
+ * this class takes care of the recursivly rendering the folder tree
+ */
+
+
 function MinusSquare(props: SvgIconProps) {
   return (
     <SvgIcon fontSize="inherit" style={{ width: 14, height: 14, color:'#736a60' }} {...props}>

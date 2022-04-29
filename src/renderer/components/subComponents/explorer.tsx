@@ -3,12 +3,19 @@ import { Box,Button, IconButton,Tooltip   } from '@mui/material'
 import Tree from "./tree/tree"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
+/**
+ * this class takes care of rendering and reciveing the file tree events
+ */
+
+// component prop interface
 interface explorerViewProps{
     callBackSetPath(path:String):void;
 }
 
+// file tree rendering is handled by this component which recieves the folder and loads all the files 
 const ExplorerView = (props:explorerViewProps) =>{
 
+  
     const {callBackSetPath} = props;
 
     useEffect(()=>{
@@ -38,23 +45,17 @@ const ExplorerView = (props:explorerViewProps) =>{
       )
 }
 
+//component prop interface
 interface folderViewProps{
     files:never[];
     onclickCallback(): any;
 }
 
+// the actual folder rendering using the loaded file structure from previus component
+
 const FolderView = (props:folderViewProps) =>{
 
     const {files, onclickCallback} = props;
-
-  
-   useEffect(()=>{
- 
-   })
-
-   /**
-    * <Tree files={tree} />
-    */
 
     return (
         <Box sx={{width:1, height:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}} >
@@ -71,6 +72,7 @@ const FolderView = (props:folderViewProps) =>{
       )
 }
 
+//main file tree  component
 const Explorer = () => {
     const [folderPath, setFolderPath] = useState('');
     const [files, setFiles] = useState([]);

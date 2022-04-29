@@ -1,6 +1,8 @@
-import  React from 'react';
-import {AppBar,IconButton,InputBase , Box, ButtonGroup, Avatar} from '@mui/material';
-import { styled} from '@mui/material/styles';
+import {AppBar,IconButton, Box, ButtonGroup,} from '@mui/material';
+
+/**
+ * this component class is responsible for rendering the top bar and its functions
+ */
 
 
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -12,26 +14,21 @@ import FileMenu from './subComponents/menus/fileMenu';
 import EditMenu from './subComponents/menus/editMenu';
 
 const NavBar = () => {
+
+  // sends the app close event
     const close = ()=>{
         window.electron.ipcRenderer.close();
     };
 
+    // sends the app mimimize event
     const minimize=()=>{
         window.electron.ipcRenderer.minimize();
     };
 
+    // sends the app close event
     const maximize=()=>{
         window.electron.ipcRenderer.maximize();
     };
-
-      /**
-       *
-              <TopBarButton title={'view'} color={'#9C865B'} menuElement={<FileMenu/>}/>
-                <TopBarButton title={'go'} color={'#97745C'} menuElement={<FileMenu/>}/>
-                <TopBarButton title={'run'} color={'#784F53'} menuElement={<FileMenu/>}/>
-                <TopBarButton title={'help'} color={'#9FB8B5'} menuElement={<FileMenu/>}/>
-                 <TopBarButton title={'selection'} color={'#D99B66'} menuElement={<FileMenu/>}/>
-       */
 
   return (
     <Box sx={{height:45}}>

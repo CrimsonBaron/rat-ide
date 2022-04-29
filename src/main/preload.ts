@@ -1,3 +1,9 @@
+/**
+ * this class takes care for exposing electron functionality to the renderer framework
+ * via electron interface 
+ */
+
+
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
 contextBridge.exposeInMainWorld('electron', {

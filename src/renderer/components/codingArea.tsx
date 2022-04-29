@@ -1,18 +1,15 @@
 
-import { Box,Paper  } from '@mui/material'
-import { styled } from '@mui/material/styles';
-import React from 'react'
+import { Box } from '@mui/material'
+
 
 import Editor from './subComponents/editor';
 import Explorer from './subComponents/explorer';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#282828' : '#282828',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+/**
+ * this class takes care of the coding stuff
+ * such ass rendering the file tree view :: <Explorer/>
+ *                        coding editor :: <Editor/>
+ */
 
 const CodingArea = () => {
   return (

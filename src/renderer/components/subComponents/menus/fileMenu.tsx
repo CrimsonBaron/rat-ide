@@ -1,6 +1,8 @@
-import React from 'react'
-import { Button,MenuList,MenuItem,ListItemText,Divider, Menu } from '@mui/material';
-import { Console } from 'console';
+import { MenuList,MenuItem,ListItemText,Divider } from '@mui/material';
+
+/**
+ * this class generates file topbar menu
+ */
 
 const closeClick = ()=>{
   window.electron.ipcRenderer.closeProject()

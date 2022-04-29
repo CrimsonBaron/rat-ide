@@ -43,6 +43,15 @@ Start the app in the `dev` environment:
 npm start
 ```
 
+## Current Issues:
+
+  <ol>
+    <li>Big folder structure display, <br>
+            desc: the app is only able to display certain ammount of nested folders --> aka. node_modules is a no go </li>
+    <li>folder id issue <br>
+            desc: the app is unable to open files from tree when the folder tree folder has the same id as some other folder, mainly happens when folder above project folder includes another identical folder structure </li>
+  </ol>
+
 ## Keyboard Shortcuts:
 Line operations:
 

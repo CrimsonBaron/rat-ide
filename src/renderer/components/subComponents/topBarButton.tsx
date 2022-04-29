@@ -1,6 +1,12 @@
-import { Button,MenuList,MenuItem,ListItemText,Divider, Menu } from '@mui/material';
+import { Button, Menu } from '@mui/material';
 import React from 'react'
 
+/**
+ * this class is a helper class for navbar component see: ../navBar.tsx
+ */
+
+
+// component prop interface
 interface topBarButtonProps{
     title:String,
     color:String,

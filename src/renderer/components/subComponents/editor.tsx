@@ -1,4 +1,10 @@
 
+/**
+ * this class takes care of loading and preping the ace editor component
+ * including its languages themes and snippets
+ */
+
+
 import React, { useEffect, useState, useRef } from "react";
 import AceEditor from "react-ace";
 import { Box } from "@mui/material";

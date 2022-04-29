@@ -2,17 +2,21 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import {Box  ,CssBaseline} from '@mui/material';
 import { createTheme, ThemeProvider,responsiveFontSizes  } from '@mui/material/styles';
 import { themeOptions } from './theming/themingOptions';
-import icon from '../../assets/icon.svg';
 
 
 import NavBar from './components/navBar';
 import CodingArea from './components/codingArea';
 
-
+/**
+ * this class is the main renderer famework class whitch
+ * contains all to be renderer elements
+ */
 
 
 import './App.css';
 
+
+// color theme initialization
 const theme = responsiveFontSizes(createTheme(themeOptions));
 
 const App = ()=>{
