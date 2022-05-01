@@ -66,10 +66,7 @@ const findPathEvents = (mainWindow:any)=>{
           console.log(data);
           event.reply('load-file', data);
       });
-      }
-
-
-      
+      }      
     })
 
         // listener for saving file content
